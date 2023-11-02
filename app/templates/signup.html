@@ -1,0 +1,24 @@
+{% include "base.html" %}
+{% load static %}
+
+<div class="col-sm-15 mx-5 ">
+    <h1 class='my-4 pb-3 '>Become an Author ?</h1>
+
+<form action="" method="post" novalidate> {% csrf_token %}
+
+    {% for i in fm %}
+
+<div class="form-group mb-0 mt-0 " >
+
+    {{i.label_tag}} {{i}}  <span class='text-danger '> {{i.errors|striptags}} </span> <br> <br>
+
+</div>
+
+    {% endfor %}
+
+    <button type="submit" class='btn btn-primary'>Sign Up</button>
+
+</form>
+    
+</div>
+

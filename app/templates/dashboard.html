@@ -1,0 +1,83 @@
+{% include "base.html" %}
+{% load static %}
+
+{% block msg %}
+
+{% if messages %}
+
+{% for message in messages %}
+
+<p class='alert alert-success my-5'>{{message}}</p>
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock msg %}
+
+{% comment %} ------------ {% endcomment %}
+    {% block content %}
+    
+    <div class="col-sm-12">
+        <h1 class='my-3 '> Dashboard Page</h1>
+
+        <a href="{% url "addpost" %}" class='btn btn-success mt-5 mb-2'> <i class="ri-file-add-line" href='{% url "addpost" %}'> </i> </a>
+
+        <h4 class='text-center alert alert-info' >Show Post Information</h4>
+
+        {% if fm %}
+        
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" style='width:2%'>#</th>
+                <th scope="col" style='width:15%'>Title</th>
+                <th scope="col" style='width:55%'>Desc</th>
+                <th scope="col" style='width:12%'>Action</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+                {% for post in fm %}
+
+              <tr>
+                <th scope="row">{{post.id}}</th>
+                <td>{{post.title}}</td>
+                <td>{{post.desc}}</td>
+
+                <td > <a href="{% url "update_post" id=post.id %}" class='btn btn-warning'> <i class="ri-pencil-fill"></i>  </a> 
+                
+                  {% if perms.app.delete_post %}
+
+                    <form action="{% url "deletepost" post.id %}" method="post" class='d-inline'> {% csrf_token %}
+          
+                        <button type="submit" class='btn btn-danger'><i class="ri-delete-bin-6-line"></i></button>
+
+                    </form>
+
+                    {% endif %}
+                </td>
+                {% comment %} <td>  </td> {% endcomment %}
+              </tr>
+        
+
+              {% endfor %}
+
+            </tbody>
+          </table>
+
+          {% else %}
+
+          <h1 class='my-5 alert alert-danger col-sm-5'>NO RECORDS FOUND</h1>
+        
+        {% endif %}
+
+    </div>
+
+    {% endblock content %}
+
+
+
+
+

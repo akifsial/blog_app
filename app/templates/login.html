@@ -1,0 +1,33 @@
+{% include "base.html" %}
+{% load static %}
+
+
+
+<div class="col-sm-15 mx-5">
+    <h1 class='my-3 '>Log In</h1>
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <p class='alert alert-success'>{{message}}</p>
+
+    {% endfor %}
+
+    {% endif %}
+
+
+    <form action="" method="post"> {% csrf_token %}
+        
+        {% for i in fm %}
+        
+        {{i.label_tag}} {{i}} {{i.errors}}
+
+        {% endfor %}
+
+        <button type="submit" class='btn btn-primary mt-4'>Log In</button>
+
+    </form>
+        
+</div>
+
